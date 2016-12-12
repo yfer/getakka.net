@@ -27,7 +27,7 @@ In case a manual recovery cycle initialization is necessary, it may be invoked b
 
 A persistent actor receives a (non-persistent) command which is first validated if it can be applied to the current state. Here validation can mean anything from simple inspection of a command message's fields up to a conversation with several external services, for example. If validation succeeds, events are generated from the command, representing the effect of the command. These events are then persisted and, after successful persistence, used to change the actor's state. When the persistent actor needs to be recovered, only the persisted events are replayed of which we know that they can be successfully applied. In other words, events cannot fail when being replayed to a persistent actor, in contrast to commands. Event sourced actors may of course also process commands that do not change application state such as query commands for example.
 
-Akka persistence supports event sourcing with the `ReceivePersistentActor` abstract class. An actor that extends this class uses the persist method to persist and handle events. The behavior of an `ReceivePersistentActor` is defined by implementing `Recover` and `Receive` methods. This is demonstrated in the following example.
+Akka persistence supports event sourcing with the `ReceivePersistentActor` abstract class. An actor that extends this class uses the persist method to persist and handle events. The behavior of an `ReceivePersistentActor` is defined by implementing `Recover` and `Command` methods. This is demonstrated in the following example.
 
 ```C#
 public class Cmd
